@@ -10,13 +10,15 @@
 
 void EvenOddPrint(int Limit, bool IsOdd) {
     if (IsOdd) {
-        for (int i = 0; i <= Limit; ++i) {
-            if (i % 2 == 0) std::cout << i << std::endl;            
+        for (int i = 0; i <= Limit; i +=2) {
+            //if (i % 2 == 0) std::cout << i << std::endl; 
+            std::cout << i << std::endl;
         }
     }
     else if (!IsOdd) {
-        for (int i = 0; i <= Limit; ++i) {
-            if (i % 2 != 0) std::cout << i << std::endl;
+        for (int i = 1; i <= Limit; i+=2) {
+            //if (i % 2 != 0) std::cout << i << std::endl;
+            std::cout << i << std::endl;
         }
     }
 }
@@ -26,8 +28,9 @@ int main()
     const int N = 10;
     EvenOddPrint(10, false);
     EvenOddPrint(25, true);
-    for (int i = 0; i <= N; ++i) {
-        if (i % 2 == 0) std::cout << i << std::endl;
+    for (int i = 0; i <= N; i += 2) {
+        //if (i % 2 == 0) std::cout << i << std::endl;
+        std::cout << i << std::endl;
     }
 }
 
