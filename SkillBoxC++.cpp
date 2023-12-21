@@ -1,20 +1,96 @@
-﻿// SkillBoxC++.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿/* 
+Создайте C++ - проект в Visual Studio(консольное приложение).
+1. Создайте класс, полями которого будут имя игрока и количество набранных этим игроком очков.
+
+2. Узнайте у пользователя, сколько игроков он хочет добавить, и создайте динамический массив необходимого размера.
+   Получите от пользователя имена игроков и набранные ими очки и сохраните в массиве.
+
+3. Отсортируйте массив по убыванию количества очков, набранных игроками.
+
+4. Выведите все имена и очки игроков в отсортированном виде.
+*/
 
 #include <iostream>
 
-int main()
+
+
+class Scores {
+private:
+	std::string name;
+	int scores;
+public:
+	Scores(std::string p_name = "Alex", int p_scores = 35) :name(p_name), scores(p_scores) {};
+
+	void SetName(std::string p_name) {
+		name = p_name;
+	}
+
+	void SetScores(int p_scores) {
+		scores = p_scores;
+	}
+
+	int GetScores()const {
+		return scores;
+	}
+
+	void Show()const {
+		std::cout << name << "....." << scores << std::endl;
+	}
+};
+
+void bubbleSort(Scores list[], int listLength)
 {
-    std::cout << "Hello World!\n";
+	while (listLength--)
+	{
+		bool swapped = false;
+
+		for (int i = 0; i < listLength; i++)
+		{
+			if (list[i].GetScores() < list[i + 1].GetScores())
+			{
+				std::swap(list[i], list[i + 1]);
+				swapped = true;
+			}
+		}
+
+		if (swapped == false)
+			break;
+	}
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+int main()
+{
+	int numberOfPlayers = 0;
+	std::cout << "Enter the number of players: ";
+	std::cin >> numberOfPlayers;
+	while(numberOfPlayers <= 0 || isalpha) {		
+		std::cin.clear();		
+		std::cin.ignore();
+		std::cout << "\nEnter the number of players: ";
+		std::cin >> numberOfPlayers;
+	}
 
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
+	Scores *arr = new Scores[numberOfPlayers];
+	
+	//Заполнение массива данными
+	for (int i = 0; i < numberOfPlayers; ++i) {
+		std::string name;
+		int scores = 0;
+		int player = i + 1;
+		std::cout << "Enter name of player " << player << ": ";
+		std::cin >> name;
+		arr[i].SetName(name);
+		std::cout << "Enter the points scored by the player " << player << ": ";
+		std::cin >> scores;
+		arr[i].SetScores(scores);
+	}
+
+	bubbleSort(arr, numberOfPlayers);
+
+	// Вывод на экран отсортированного массива
+	for (Scores *i = &arr[0]; i != (arr + numberOfPlayers); ++i) {
+		i->Show();
+	}
+	delete[] arr;
+
+}
